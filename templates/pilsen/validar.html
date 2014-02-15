@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.1.10.2.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+    <title></title>
+</head>
+<body>
+    <br/>
+    <form action="index.html" method="post" class="form-horizontal" role="form" id="form_validar">
+        <div class="form-group">
+            <label for="tipo_documento" class="col-sm-5 control-label">Tipo Documento</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="tipo_documento">
+                    <option value="DNI">DNI</option>
+                    <option value="PASAPORTE">PASAPORTE</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="num_doc" class="col-sm-5 control-label">N° Documento</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="num_doc">
+            </div>
+        </div>
+    </form>
+</body>
+</html>

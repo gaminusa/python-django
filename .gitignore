@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+*.~
+*.sublime*
+.settings/*
+.idea
+.directory
+.project

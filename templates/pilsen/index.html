@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.1.10.2.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+    <title></title>
+</head>
+<body>
+    <br/>
+    <p> HOLA MUNDO</p>
+    {% for inscrito in inscritos %}
+        <p>Nombre: {{ inscrito.nombres }}</p>
+        <p>Apellido P: {{ inscrito.apellido_paterno }}</p>
+        <p>Apellido M: {{ inscrito.apellido_materno }}</p>
+        <p>Sexo: {{ inscrito.sexo }}</p>
+        <p>Email: {{ inscrito.email }}</p>
+        <p>Direccion: {{ inscrito.direccion }}</p>
+        <p>Telefono: {{ inscrito.telefono }}</p>
+        <p>Celular: {{ inscrito.celular }}</p>
+        <p>Ubigeo: {{ inscrito.ubigeo }}</p>
+    {% endfor %}
+
+
+</body>
+</html>

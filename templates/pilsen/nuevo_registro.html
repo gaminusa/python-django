@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.1.10.2.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+    <title></title>
+</head>
+<body>
+
+    <center>
+        <h4>LLENA TUS DATOS</h4>
+        <b>PARA PARTICIPAR</b>
+    </center>
+    <br/>
+    <form action="" method="post" class="form-horizontal" role="form" id="form_registro">
+        <div class="form-group">
+            <label for="nombres" class="col-sm-5 control-label">Nombres</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="nombres">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="apellido_paterno" class="col-sm-5 control-label">Apellido Paterno</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="apellido_paterno">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="apellido_materno" class="col-sm-5 control-label">Apellido Materno</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="apellido_materno">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fecha_nacimiento" class="col-sm-5 control-label">Fecha Nacimiento</label>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="fecha_nacimiento">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tipo_documento" class="col-sm-5 control-label">Tipo Documento</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="tipo_documento">
+                    <option value="DNI">DNI</option>
+                    <option value="PASAPORTE">PASAPORTE</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="num_doc" class="col-sm-5 control-label">N° Documento</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="num_doc">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sexo" class="col-sm-5 control-label">Sexo</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="sexo">
+                    <option value="F">FEMENINO</option>
+                    <option value="M">MASCULINO</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-5 control-label">Correo Electrónico</label>
+            <div class="col-sm-3">
+                 <input type="email" class="form-control" id="email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="celular" class="col-sm-5 control-label">Celular</label>
+            <div class="col-sm-3">
+                 <input type="number" class="form-control" id="celular">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="departamento" class="col-sm-5 control-label">Departamento</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="departamento">
+                    <option value="">Selecciona</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="provincia" class="col-sm-5 control-label">Provincia</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="provincia">
+                    <option value=" ">Selecciona</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="distrito" class="col-sm-5 control-label">Distrito</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="distrito">
+                    <option value=" ">Selecciona</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        <center><button type="button" class="btn btn-primary">Guardar</button></center>
+
+
+    </form>
+</body>
+</html>
