@@ -10,11 +10,11 @@
 <body>
 
     <center>
-        <h4>LLENA TUS DATOS</h4>
-        <b>PARA PARTICIPAR</b>
+        <h4>LLENA LOS DATOS</h4>
+        <b>DE TU PATA</b>
     </center>
     <br/>
-    <form action="" method="post" class="form-horizontal" role="form">
+    <form action="" method="post" class="form-horizontal" role="form" >
         {% csrf_token %}
         {{ wizard.management_form }}
 
@@ -39,8 +39,6 @@
         {% endfor %}
         <hr>
         <center><button type="submit" class="btn btn-primary">Guardar</button></center>
-
-
     </form>
 </body>
 </html>

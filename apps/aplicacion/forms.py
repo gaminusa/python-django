@@ -1,8 +1,38 @@
 # -*- coding:utf-8 -*-
 
 from django import forms
-from .models import Inscritos
+from aplicacion import constants
+from .models import Inscrito, Pata
+
 
 class DocumentoValidationForm(forms.ModelForm):
-    num_doc = forms.CharField(required=True,max_length=15, min_length=8)
-    tipo_doc
+    class Meta:
+        model = Inscrito
+        fields = ('num_doc', 'tipo_doc')
+
+
+class NuevoRegistroForm(forms.ModelForm):
+    class Meta:
+        model = Inscrito
+        fields = ('nombres', 'apellido_paterno', 'apellido_materno', 'fec_nac',
+                  'tipo_doc', 'num_doc', 'sexo', 'email', 'celular', 'ubigeo')
+
+
+class RegistroPataForm(forms.ModelForm):
+
+    mayor_edad = forms.ChoiceField(
+        choices=constants.CHOICES_EDAD,
+        widget=forms.RadioSelect()
+    )
+
+    class Meta:
+        model = Pata
+        fields = ('nombres', 'mayor_edad', 'ubigeo', 'direccion',
+                  'referencia', 'cel')
+
+
+class MensajePata(forms.ModelForm):
+
+    class Meta:
+        model = Pata
+        fields = ('mensaje', )

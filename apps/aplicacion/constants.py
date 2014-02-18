@@ -7,6 +7,11 @@ CHOICES_TIPO_DOCUMENTO = [
 ]
 
 CHOICES_SEXO = [
-    (1,'FEMENINO'),
-    (2,'MASCULINO') ,
+    (1, 'FEMENINO'),
+    (2, 'MASCULINO')
+]
+
+CHOICES_EDAD = [
+    (1, 'SI'),
+    (2, 'NO')
 ]

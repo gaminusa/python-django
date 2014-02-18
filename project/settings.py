@@ -24,6 +24,8 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+PROMOTION_ID = 24
+
 ALLOWED_HOSTS = ['*']
 
 

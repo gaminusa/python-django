@@ -8,14 +8,9 @@
     <title></title>
 </head>
 <body>
-
-    <center>
-        <h4>LLENA TUS DATOS</h4>
-        <b>PARA PARTICIPAR</b>
-    </center>
     <br/>
-    <form action="" method="post" class="form-horizontal" role="form">
-        {% csrf_token %}
+    <form action="" method="post" class="form-horizontal" role="form" >
+         {% csrf_token %}
         {{ wizard.management_form }}
 
         {% if form.errors %}
@@ -40,7 +35,7 @@
         <hr>
         <center><button type="submit" class="btn btn-primary">Guardar</button></center>
 
-
     </form>
+
 </body>
 </html>

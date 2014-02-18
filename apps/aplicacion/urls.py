@@ -5,7 +5,7 @@ from aplicacion import views
 
 urlpatterns = patterns('',
     url(r'^validar/$', views.ValidarView.as_view(), name='validar'),
-    url(r'^registro/$', views.RegistroNuevoView.as_view(), name='registro'),
+    url(r'^registro/$', views.RegistraProcesoWizardView.as_view(), name='registro'),
     url(r'^$', views.IndexView.as_view(), name='index'),
 )
 

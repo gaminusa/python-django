@@ -1,6 +1,7 @@
 #encoding:utf-8
 from django.db import models
 from aplicacion import constants
+from aplicacion.constants import CHOICES_EDAD
 
 
 class Inscrito(models.Model):
@@ -54,3 +55,55 @@ class Inscrito(models.Model):
 
     def __unicode__(self):
         return u"%s %s" % (self.nombres, self.apellido_paterno)
+
+
+class Pata(models.Model):
+    nombres = models.CharField(
+        u'Nombres',
+        max_length=100
+    )
+    mayor_edad = models.PositiveIntegerField(
+        choices=CHOICES_EDAD,
+        blank=False,
+        null=False
+    )
+    ubigeo = models.CharField(
+        max_length=6
+    )
+    direccion = models.CharField(
+        u'Direccion',
+        max_length=100
+    )
+    referencia = models.CharField(
+        u'Referencia',
+        max_length=100
+    )
+    cel = models.PositiveIntegerField(
+        u'Celular',
+    )
+    dni_inscrito = models.CharField(
+        u'Dni',
+        max_length=15
+    )
+    mensaje = models.CharField(
+        u'Mensaje',
+        max_length=150
+    )
+
+    def __unicode__(self):
+        return u"%s %s %s" % (self.nombres, self.dni_inscrito, self.mensaje)
+
+
+class PromocionesInscritos(models.Model):
+    dni = models.CharField(
+        u'Dni',
+        max_length=15
+    )
+    fecha_registro = models.DateTimeField(
+        auto_now=True
+    )
+
+    class Meta:
+        db_table = u'promociones_inscrito'
+
+
