@@ -8,6 +8,61 @@
     <title></title>
 </head>
 <body>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#cboDepartment").change(function(){
+            $.ajax({
+                type:'POST',
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+                },
+                url: "{% url 'ubigeo' %}",
+                data:JSON.stringify({
+                    'departamento': $('#cboDepartment').val()
+                }),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    $("#cboProvince").empty()
+                    $.each(data, function (code, name) {
+                        option = "<option value=" + code + ">" + name + "</option>";
+                        $("#cboProvince").append(option);
+                    });
+
+                }
+            })
+        });
+
+         $("#cboProvince").on('change', function () {
+             $.ajax({
+                type:'POST',
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+                },
+                url: "{% url 'distrito' %}",
+                data:JSON.stringify({
+                    'provincia': $('#cboProvince').val()
+                }),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                   $("#cboDistrict").empty()
+                   $.each(data, function (code, name) {
+                        option = "<option value=" + code + ">" + name + "</option>";
+                        $("#cboDistrict").append(option);
+                   });
+
+                }
+            })
+        });
+
+
+
+
+    });
+</script>
+
 
     <center>
         <h4>LLENA TUS DATOS</h4>
@@ -28,19 +83,107 @@
             </div>
         {% endif %}
 
-        {% for field in form %}
-            <div class="form-group">
-                <label class="col-sm-5 control-label">{{ field.label }}</label>
-                <div class="col-sm-3">
-                    {{ field }}
-                    {% if field.errors %}<span class="help-inline">{{ field.errors.as_text }}</span>{% endif %}
-                </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Nombres</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="id_0-nombres" name="id_0-nombres" value="{{ form.nombres.value}}">
+                {% if form.nombres.errors %}<span class="help-inline">{{ form.nombres.errors.as_text }}</span>{% endif %}
             </div>
-        {% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Apellido Paterno</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="id_0-apellido_paterno" nane="id_0-apellido_paterno" value="{{ form.apellido_paterno.value|default:"" }}">
+                {% if form.apellido_paterno.errors %}<span class="help-inline">{{ form.apellido_paterno.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Apellido Materno</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="id_0-apellido_materno" name="id_0-apellido_materno" value="{{ form.apellido_materno.value|default:"" }}">
+                {% if form.apellido_materno.errors %}<span class="help-inline">{{ form.apellido_materno.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Fecha Nacimiento</label>
+            <div class="col-xs-2">
+                <input type="text" class="form-control small" id="id_0-fec_nac" name="id_0-fec_nac" value="{{ form.fec_nac.value|default:"" }}">
+                {% if form.fec_nac.errors %}<span class="help-inline">{{ form.fec_nac.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Documento</label>
+            <div class="col-xs-2">
+                <select id="id_0-tipo_doc" class="form-control" name="id_0-tipo_doc">
+                    {% for document in form.tipo_doc.field.choices %}
+                        <option value="{{ document.0 }}"{% if form.tipo_doc.value == document.0|escape %}selected{% endif %}>{{ document.1 }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.tipo_doc.errors %}<span class="help-inline">{{ form.tipo_doc.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">N°Documento</label>
+            <div class="col-xs-2">
+                <input type="text" class="form-control small" id="id_0-num_doc" name="id_0-num_doc" value="{{ form.num_doc.value|default:"" }}">
+                {% if form.num_doc.errors %}<span class="help-inline">{{ form.num_doc.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+    <div class="form-group">
+            <label class="col-sm-5 control-label">Sexo</label>
+            <div class="col-xs-2">
+                <select id="id_0-sexo" class="form-control" name="id_0-sexo">
+                    {% for sex in form.sexo.field.choices %}
+                        <option value="{{ sex.0 }}"{% if form.sexo.value == sex.0|escape %}selected{% endif %}>{{ sex.1 }}</option>
+                    {% endfor %}
+                </select>
+                {% if form.sexo.errors %}<span class="help-inline">{{ form.sexo.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Email</label>
+            <div class="col-xs-2">
+                <input type="text" class="form-control small" id="id_0-email" name="id_0-email" value="{{ form.email.value|default:"" }}">
+                {% if form.email.errors %}<span class="help-inline">{{ form.email.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Celular</label>
+            <div class="col-xs-2">
+                <input type="text" class="form-control small" id="id_0-celular" name="id_0-celular" value="{{ form.celular.value|default:"" }}">
+                {% if form.celular.errors %}<span class="help-inline">{{ form.celular.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Departamento</label>
+                <div class="col-sm-3">
+                    <select name="cboDepartment" id="cboDepartment" class="select form-control" style="width:200px;">
+                        <option value="">Selecciona</option>
+                        {% for department in departments %}
+                        <option value="{{ department.pk }}" {% if department.pk == form.ubigeo.value.parent.parent.pk %}selected{% endif %} >{{ department.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Provincia</label>
+                <div class="col-sm-3">
+                    <select name="cboProvince" id="cboProvince" class="select form-control" style="width:200px;">
+                        <option value="">Selecciona</option>
+                    </select>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Distrito</label>
+                <div class="col-sm-3">
+                    <select name="cboDistrict" id="cboDistrict" class="select form-control" style="width:200px;">
+                        <option value="">Selecciona</option>
+                    </select>
+                </div>
+        </div>
         <hr>
         <center><button type="submit" class="btn btn-primary">Guardar</button></center>
-
-
     </form>
 </body>
 </html>

@@ -2,6 +2,7 @@
 from django.db import models
 from aplicacion import constants
 from aplicacion.constants import CHOICES_EDAD
+from ubigeo.models import Ubigeo
 
 
 class Inscrito(models.Model):
@@ -9,14 +10,17 @@ class Inscrito(models.Model):
         auto_now=True
     )
     num_doc = models.CharField(
-        u'Numero de Documento',
+        u'N° de Documento',
         max_length=15
     )
     tipo_doc = models.PositiveIntegerField(
+        u'Tipo de Documento',
         choices=constants.CHOICES_TIPO_DOCUMENTO,
         max_length=1
     )
-    fec_nac = models.DateField()
+    fec_nac = models.DateField(
+        u'Fecha Nacimiento',
+    )
     nombres = models.CharField(
         u'Nombres',
         max_length=30
@@ -49,8 +53,12 @@ class Inscrito(models.Model):
         u'Celular',
         max_length=10
     )
-    ubigeo = models.CharField(
-        max_length=6
+    ubigeo = models.ForeignKey(
+        Ubigeo,
+        verbose_name=u'Departamento',
+        related_name="ubigeo_corp",
+        blank=True,
+        null=True
     )
 
     def __unicode__(self):
@@ -99,6 +107,7 @@ class PromocionesInscritos(models.Model):
         u'Dni',
         max_length=15
     )
+    id_promocion = models.IntegerField()
     fecha_registro = models.DateTimeField(
         auto_now=True
     )
