@@ -28,17 +28,101 @@
             </div>
         {% endif %}
 
-        {% for field in form %}
-            <div class="form-group">
-                <label class="col-sm-5 control-label">{{ field.label }}</label>
-                <div class="col-sm-3">
-                    {{ field }}
-                    {% if field.errors %}<span class="help-inline">{{ field.errors.as_text }}</span>{% endif %}
-                </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Nombre Completo de tu Pata</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="nombres" name="1-nombres" value="{{ form.nombres.value|default:""}}">
+                {% if form.nombres.errors %}<span class="help-inline">{{ form.nombres.errors.as_text }}</span>{% endif %}
             </div>
-        {% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Es Mayor de Edad</label>
+            <div class="col-sm-3">
+                <label class="radio-inline">
+                    {% for document in form.mayor_edad.field.choices %}
+                        <input type="checkbox" name="1-mayor_edad" id="mayor_edad" value="{{ document.0 }}" {% if form.mayor_edad.value == document.0|escape %}checked{% endif %}>{{ document.1 }}
+                    {% endfor %}
+                </label>
+                {% if form.mayor_edad.errors %}<span class="help-inline">{{ form.mayor_edad.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Provincia</label>
+                <div class="col-sm-3">
+                    <select name="cboProvince" id="cboProvince" class="select form-control" style="width:200px;">
+                        <option value="">Selecciona</option>
+                        {% for province in provincias %}
+                        <option value="{{ province.pk }}" >{{ province.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Distrito</label>
+                <div class="col-sm-3">
+                    <select name="cboDistrict" id="cboDistrict" class="select form-control" style="width:200px;">
+                        <option value="">Selecciona</option>
+                    </select>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Direccion</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="direccion" name="1-direccion" value="{{ form.direccion.value|default:""}}">
+                {% if form.direccion.errors %}<span class="help-inline">{{ form.direccion.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Referencia</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="referencia" name="1-referencia" value="{{ form.referencia.value|default:""}}">
+                {% if form.referencia.errors %}<span class="help-inline">{{ form.referencia.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Dejanos tu cel para confirmar</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="cel" name="1-cel" value="{{ form.cel.value|default:""}}">
+                {% if form.cel.errors %}<span class="help-inline">{{ form.cel.errors.as_text }}</span>{% endif %}
+            </div>
+        </div>
+        <div>
+            <input type="hidden" id="ubigeo" name="1-ubigeo" value="{{ form.ubigeo.value|default:"" }}"/>
+        </div>
         <hr>
         <center><button type="submit" class="btn btn-primary">Guardar</button></center>
     </form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#cboProvince").on('change', function () {
+             $.ajax({
+                type:'POST',
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+                },
+                url: "{% url 'distrito' %}",
+                data:JSON.stringify({
+                    'provincia': $('#cboProvince').val()
+                }),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                   $("#cboDistrict").empty()
+                   $.each(data, function (code, name) {
+                        option = "<option value=" + code + ">" + name + "</option>";
+                        $("#cboDistrict").append(option);
+                   });
+
+                }
+            })
+        });
+
+        $("#cboDistrict").change(function(){
+            $('#ubigeo').val($('#cboDistrict').val());
+        })
+
+
+    });
+</script>
 </body>
 </html>

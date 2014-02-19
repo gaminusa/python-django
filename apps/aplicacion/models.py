@@ -56,7 +56,6 @@ class Inscrito(models.Model):
     ubigeo = models.ForeignKey(
         Ubigeo,
         verbose_name=u'Departamento',
-        related_name="ubigeo_corp",
         blank=True,
         null=True
     )
@@ -75,8 +74,12 @@ class Pata(models.Model):
         blank=False,
         null=False
     )
-    ubigeo = models.CharField(
-        max_length=6
+    ubigeo = models.ForeignKey(
+        Ubigeo,
+        verbose_name=u'Ubigeo',
+        blank=True,
+        null=True
+
     )
     direccion = models.CharField(
         u'Direccion',

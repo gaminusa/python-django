@@ -49,6 +49,8 @@ class RegistraProcesoWizardView(CookieWizardView):
         if self.steps.step0 == 0:
             context['departments'] = Ubigeo.objects.departments().using(
                 'default')
+        if self.steps.step0 == 1:
+            context['provincias'] = Ubigeo.objects.filter(parent__pk__in=[15, 7])
 
         return context
 
@@ -64,7 +66,7 @@ class RegistraProcesoWizardView(CookieWizardView):
         nuevo_registro = form_list[0]
         registro_pata = form_list[1]
         mensaje_pata = form_list[2]
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         nuevo = nuevo_registro.save()
         pata = registro_pata.save(commit=False)
         pata.dni_inscrito = nuevo.num_doc

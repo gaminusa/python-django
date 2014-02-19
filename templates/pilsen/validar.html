@@ -21,6 +21,7 @@
             </div>
         {% endif %}
 
+
         {% for field in form.visible_fields %}
             <div class="form-group">
                 <label for="tipo_documento" class="col-sm-5 control-label">{{ field.label }}{% if field.field.required %} *{% endif %} </label>

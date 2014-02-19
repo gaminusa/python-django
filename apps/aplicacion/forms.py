@@ -19,7 +19,6 @@ class NuevoRegistroForm(forms.ModelForm):
 
 
 class RegistroPataForm(forms.ModelForm):
-
     mayor_edad = forms.ChoiceField(
         choices=constants.CHOICES_EDAD,
         widget=forms.RadioSelect()
@@ -32,6 +31,7 @@ class RegistroPataForm(forms.ModelForm):
 
 
 class MensajePata(forms.ModelForm):
+    mensaje = forms.Textarea()
 
     class Meta:
         model = Pata

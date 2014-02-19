@@ -23,15 +23,13 @@
             </div>
         {% endif %}
 
-        {% for field in form %}
-            <div class="form-group">
-                <label class="col-sm-5 control-label">{{ field.label }}</label>
-                <div class="col-sm-3">
-                    {{ field }}
-                    {% if field.errors %}<span class="help-inline">{{ field.errors.as_text }}</span>{% endif %}
-                </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Dejale un mensaje</label>
+            <div class="col-sm-3">
+                <textarea class="form-control" id="mensaje" name="2-mensaje" value="{{ form.mensaje.value|default:""}}"> </textarea>
+                {% if form.mensaje.errors %}<span class="help-inline">{{ form.mensaje.errors.as_text }}</span>{% endif %}
             </div>
-        {% endfor %}
+        </div>
         <hr>
         <center><button type="submit" class="btn btn-primary">Guardar</button></center>
 
