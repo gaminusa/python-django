@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.formtools.wizard.views import CookieWizardView
 from django.shortcuts import redirect
-from django.template import response
 from aplicacion.models import Inscrito, PromocionesInscritos
 from django.views.generic import TemplateView, View, FormView
 from django.http import HttpResponse
@@ -23,7 +22,7 @@ class ValidarView(FormView):
     def form_valid(self, form):
         num_doc = form.cleaned_data['num_doc']
         tipo_doc = form.cleaned_data['tipo_doc']
-
+        self.request.session['dni'] = num_doc
         # consulta
         value = Inscrito.objects.filter(
             tipo_doc=tipo_doc, num_doc=num_doc).exists()

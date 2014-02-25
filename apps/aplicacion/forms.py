@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 from django import forms
+from django.forms import widgets
 from aplicacion import constants
 from .models import Inscrito, Pata
 
@@ -31,8 +32,8 @@ class RegistroPataForm(forms.ModelForm):
 
 
 class MensajePata(forms.ModelForm):
-    mensaje = forms.Textarea()
-
     class Meta:
         model = Pata
-        fields = ('mensaje', )
+        widgets = {
+            'mensaje': forms.Textarea(attrs={'cols': 200, 'rows': 200}),
+        }

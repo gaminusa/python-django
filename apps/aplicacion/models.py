@@ -1,4 +1,5 @@
 #encoding:utf-8
+from django import forms
 from django.db import models
 from aplicacion import constants
 from aplicacion.constants import CHOICES_EDAD
@@ -55,7 +56,7 @@ class Inscrito(models.Model):
     )
     ubigeo = models.ForeignKey(
         Ubigeo,
-        verbose_name=u'Departamento',
+        verbose_name=u'Ubigeo',
         blank=True,
         null=True
     )
@@ -93,12 +94,12 @@ class Pata(models.Model):
         u'Celular',
     )
     dni_inscrito = models.CharField(
-        u'Dni',
+        u'Dni Pata',
         max_length=15
     )
     mensaje = models.CharField(
         u'Mensaje',
-        max_length=150
+        max_length=150,
     )
 
     def __unicode__(self):
